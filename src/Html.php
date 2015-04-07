@@ -116,7 +116,7 @@ class Html {
 				'upload' => $this->uploadButton
 			];
 
-			$this->data = compact('options', 'id', 'autoStart', 'buttons');
+			$this->data = array_merge($this->data, compact('options', 'id', 'autoStart', 'buttons'));
 		}
 
 		return $this->data;
@@ -175,6 +175,19 @@ class Html {
 	public function setUploadButton($button)
 	{
 		$this->uploadButton = $button;
+		return $this;
+	}
+
+	/**	 
+	 * Set uploader custom params
+	 * 
+	 * @param array $params
+	 * 
+	 * @return void
+	 */ 
+	public function setCustomParams(array $params)
+	{
+		$this->data['params'] = $params;
 		return $this;
 	}
 
