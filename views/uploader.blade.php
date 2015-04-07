@@ -3,7 +3,7 @@
 		data-options="{{ json_encode($options) }}" 
 		data-autostart="{{ intval($autoStart) }}"
 		data-uploadbtn="uploader-{{ $id }}-upload">
-		<div id="{{ $options['container'] }}" class="controls uploader col-sm-6">                        
+		<div id="{{ $options['container'] }}" class="controls uploader">                        
 			<div class="filelist"></div>
 			<div class="upload-actions">
 				{!! $buttons['pickFiles'] !!}

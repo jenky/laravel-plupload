@@ -39,12 +39,14 @@ class PluploadServiceProvider extends ServiceProvider {
 	{
 		$configPath = __DIR__ . '/../config/plupload.php';
 		$viewsPath = __DIR__.'/../views';
+		$assetsPath = __DIR__.'/../assets';
 		
 		$this->loadViewsFrom($viewsPath, 'plupload');
 
 		$this->publishes([$configPath => config_path('plupload.php')], 'config');
 		$this->publishes([
 			$viewsPath => base_path('resources/views/vendor/plupload'),
+			$assetsPath . '/js' => base_path('resources/assets/plupload'),
 		]);
 	}
 
