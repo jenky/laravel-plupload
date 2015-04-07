@@ -21,7 +21,7 @@ class File {
 	public function __construct(Request $request)
 	{
 		$this->request = $request;
-		$this->storage = app('filesystem');
+		$this->storage = app('files');
 	}
 
 	/**
