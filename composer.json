@@ -1,6 +1,7 @@
 {
     "name": "jenky/laravel-plupload",
-    "description": "",
+    "description": "Plupload package for Laravel 5.0",
+    "keywords": ["laravel", "plupload"],
     "authors": [
         {
             "name": "Linh Tran",
@@ -13,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Jenky\\LaravelPlupload": "src/"
+            "Jenky\\LaravelPlupload\\": "src/"
         }
     },
     "minimum-stability": "stable"
