@@ -14,6 +14,6 @@ return [
 	|
 	*/
 
-	'flash_swf_url' => public_path('assets/plupload/js/Moxie.swf'),
-	'silverlight_xap_url' => public_path('assets/plupload/js/Moxie.xap'),
+	'flash_swf_url' => '/js/Moxie.swf',
+	'silverlight_xap_url' => '/js/Moxie.xap',
 ];
