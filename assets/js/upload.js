@@ -39,12 +39,12 @@ function createUploader(uploaderId)
 							deleteUrl = $this.data('deleteurl') || false,
 							id = $this.data('id') || false;
 						
-						if (id && deleteUrl) {
+						if (deleteUrl) {
 							$.ajax({
 								dataType: 'json',
 								type: 'DELETE',
 								url: deleteUrl,
-								data: {},
+								data: options.multipart_params,
 								success: function(result) {                                  
 									if (result.success) {
 										up.removeFile(file);
@@ -64,9 +64,9 @@ function createUploader(uploaderId)
 							up.removeFile(file);                 
 						}
 					});
-				});
+				}); 
 				up.refresh(); // Reposition Flash/Silverlight
-				if (autoStart) {
+				if (autoStart || !options.multi_selection) {
 					$uploadAction.hide();
 					up.start();
 				}
@@ -90,15 +90,12 @@ function createUploader(uploaderId)
 
 			FileUploaded: function(up, file, info) {
 				var response = JSON.parse(info.response);
-				// var response = info.response.result;
 
 				$('#' + file.id + ' .progress .progress-bar').animate({width: '100%'}, 100,  'linear');
 				$('#' + file.id + ' .progress').removeClass('progress-striped').removeClass('active').fadeOut();
 				$('#' + file.id + ' .filename').removeClass('hide').show();                
 				$('#' + file.id + ' button.cancelUpload').show();                
 				
-				console.log(response);
-
 				if (response.result.id) {
 					$('#' + file.id + ' button.cancelUpload').attr('data-id', response.result.id);
 					$('<input type="hidden" name="' + uploaderId + '_file[]" value="' + response.result.id + '" id="' + file.id + '-hidden">').appendTo($uploader);
@@ -109,7 +106,7 @@ function createUploader(uploaderId)
 				}
 
 				if (response.result.url) {
-					$('#' + file.id).append('<img src="' + response.result.url + '" class="img-responsive" />');
+					$('#' + file.id).append('<img src="' + response.result.url + '" class="img-responsive img-thumbnail" />');
 				}
 
 			}
