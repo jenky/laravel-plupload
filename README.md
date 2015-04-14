@@ -1,6 +1,7 @@
 # Laravel 5 Plupload
 
 Laravel package for Plupload http://plupload.com
+This package use some parts of https://github.com/jildertmiedema/laravel-plupload
 
 ## Installation
 Require this package with composer:
@@ -136,4 +137,4 @@ Use this in your route or your controller. Feel free to modify to suit your need
 	});
 ```
 
-If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete URL. Please note that the `deleteUrl` uses `DELETE` method.
+If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link. Please note that the `deleteUrl` uses `DELETE` method.
