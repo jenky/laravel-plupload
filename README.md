@@ -1,7 +1,7 @@
 # Laravel 5 Plupload
 
-Laravel package for Plupload http://plupload.com
-This package use some parts of https://github.com/jildertmiedema/laravel-plupload
+Laravel package for Plupload http://plupload.com.
+######This package use some parts of https://github.com/jildertmiedema/laravel-plupload
 
 ## Installation
 Require this package with composer:
