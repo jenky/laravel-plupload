@@ -1,7 +1,7 @@
 # Laravel 5 Plupload
 
 [![Latest Stable Version](https://poser.pugx.org/jenky/laravel-plupload/v/stable.svg)](https://packagist.org/packages/jenky/laravel-plupload) 
-[![Total Downloads](https://poser.pugx.org/jenky/laravel-plupload/downloads.svg)](https://packagist.org/packages/jenky/laravel-plupload) 
+[![Total Downloads](https://poser.pugx.org/jenky/laravel-plupload/d/total.svg)](https://packagist.org/packages/jenky/laravel-plupload) 
 [![License](https://poser.pugx.org/jenky/laravel-plupload/license.svg)](https://packagist.org/packages/jenky/laravel-plupload)
 
 ######Laravel package for Plupload http://plupload.com.
