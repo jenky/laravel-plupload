@@ -23,12 +23,16 @@ or add this to `composer.json`
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 'Jenky\LaravelPlupload\PluploadServiceProvider',
+// or 
+Jenky\LaravelPlupload\PluploadServiceProvider::class, // PHP 5.5
 ```
 
 Add this to your facades in `config/app.php`:
 
 ```php
 'Plupload' => 'Jenky\LaravelPlupload\Facades\Plupload',
+// or 
+'Plupload' => Jenky\LaravelPlupload\Facades\Plupload::class, // PHP 5.5
 ```
 
 Copy the package config to your local config with the publish command:
