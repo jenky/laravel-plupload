@@ -1,5 +1,8 @@
-<?php namespace Jenky\LaravelPlupload;
+<?php 
 
-class Exception extends \Exception {
+namespace Jenky\LaravelPlupload;
+
+class Exception extends \Exception 
+{
 	
 }

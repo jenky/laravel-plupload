@@ -1,9 +1,11 @@
-<?php namespace Jenky\LaravelPlupload;
+<?php 
+
+namespace Jenky\LaravelPlupload;
 
 use Illuminate\Support\ServiceProvider;
 
-class PluploadServiceProvider extends ServiceProvider {
-
+class PluploadServiceProvider extends ServiceProvider 
+{
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *

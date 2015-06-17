@@ -1,7 +1,9 @@
-<?php namespace Jenky\LaravelPlupload;
+<?php 
 
-class Html {
+namespace Jenky\LaravelPlupload;
 
+class Html 
+{
 	/**
 	 * @var bool
 	 */ 
@@ -83,41 +85,38 @@ class Html {
 
 	protected function init()
 	{
-		if (!$this->data)
+		if (empty($this->options['url']))
 		{
-			if (empty($this->options['url']))
-			{
-				throw new Exception("Missing URL option.", 1);				
-			}
-
-			$options = [];
-
-			if (empty($this->options['browse_button']))
-			{
-				$options['browse_button'] = 'uploader-' . $this->id . '-pickfiles';
-			}
-
-			if (empty($this->options['container']))
-			{
-				$options['container'] = 'uploader-' . $this->id . '-container';
-			}
-
-			$options = array_merge($this->options, $options);
-
-			// csrf token
-			$options['multipart_params']['_token'] = csrf_token();
-			
-			$this->initDefaultButtons($options);
-
-			$id = $this->id;
-			$autoStart = $this->autoStart;
-			$buttons = [
-				'pickFiles' => $this->pickFilesButton,
-				'upload' => $this->uploadButton
-			];
-
-			$this->data = array_merge($this->data, compact('options', 'id', 'autoStart', 'buttons'));
+			throw new Exception("Missing URL option.", 1);				
 		}
+
+		$options = [];
+
+		if (empty($this->options['browse_button']))
+		{
+			$options['browse_button'] = 'uploader-' . $this->id . '-pickfiles';
+		}
+
+		if (empty($this->options['container']))
+		{
+			$options['container'] = 'uploader-' . $this->id . '-container';
+		}
+
+		$options = array_merge($this->options, $options);
+
+		// csrf token
+		$options['multipart_params']['_token'] = csrf_token();
+		
+		$this->initDefaultButtons($options);
+
+		$id = $this->id;
+		$autoStart = $this->autoStart;
+		$buttons = [
+			'pickFiles' => $this->pickFilesButton,
+			'upload' => $this->uploadButton
+		];
+
+		$this->data = array_merge($this->data, compact('options', 'id', 'autoStart', 'buttons'));
 
 		return $this->data;
 	}
@@ -191,7 +190,7 @@ class Html {
 		return $this;
 	}
 
-	public function render($view = 'plupload::uploader', array $extra = array())
+	public function render($view = 'plupload::uploader', array $extra = [])
 	{
 		$this->init();
 

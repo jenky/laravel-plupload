@@ -1,10 +1,12 @@
-<?php namespace Jenky\LaravelPlupload;
+<?php 
+
+namespace Jenky\LaravelPlupload;
 
 use Illuminate\Http\Request;
 use Closure;
 
-class Plupload {
-
+class Plupload 
+{
 	/**
 	 * @var Illuminate\Http\Request
 	 */ 
@@ -40,8 +42,6 @@ class Plupload {
 	 */ 
 	public function make($id, $url)
 	{
-		// $id = is_null($id) ? str_random() : $id;
-
 		return new Html($id, $url);
 	}
 }

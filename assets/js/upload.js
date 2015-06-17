@@ -30,7 +30,7 @@ function createUploader(uploaderId)
 				$.each(files, function(i, file){
 					$filelist.append(
 						'<div id="' + file.id + '" class="alert alert-file">' +
-						'<span class="filename hide">' + file.name + ' (' + plupload.formatSize(file.size) + ') </span> <button type="button" class="close cancelUpload">&times;</button>' +
+						'<div class="filename hide">' + file.name + ' (' + plupload.formatSize(file.size) + ')  <button type="button" class="close cancelUpload">&times;</button></div>' +
 						'<div class="progress progress-striped"><div class="progress-bar" style="width: 1%;"></div></div></div>');
 
 					$filelist.on('click', '#' + file.id + ' button.cancelUpload', function() {
@@ -98,7 +98,7 @@ function createUploader(uploaderId)
 				
 				if (response.result.id) {
 					$('#' + file.id + ' button.cancelUpload').attr('data-id', response.result.id);
-					$('<input type="hidden" name="' + uploaderId + '_file[]" value="' + response.result.id + '" id="' + file.id + '-hidden">').appendTo($uploader);
+					$('<input type="hidden" name="' + uploaderId + '_files[]" value="' + response.result.id + '" id="' + file.id + '-hidden">').appendTo($uploader);
 				}
 
 				if (response.result.deleteUrl) {

@@ -1,11 +1,13 @@
-<?php namespace Jenky\LaravelPlupload;
+<?php 
+
+namespace Jenky\LaravelPlupload;
 
 use Illuminate\Http\Request;
 use Closure;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class File {
-
+class File 
+{
 	/**
 	 * @var Illuminate\Http\Request
 	 */ 
