@@ -145,4 +145,8 @@ Use this in your route or your controller. Feel free to modify to suit your need
 	});
 ```
 
-If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link. Please note that the `deleteUrl` uses `DELETE` method.
+If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link while the `id` will be appended to the uploader as a hidden field with the following format:
+
+`<input type="hidden" name="{uploaderId}_files[]" value="{id}" />`. 
+
+Please note that the `deleteUrl` uses `DELETE` method.
