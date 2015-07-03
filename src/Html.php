@@ -36,10 +36,10 @@ class Html
 
 	public function __construct($id, $url)
 	{
+		$this->initDefaultOptions();
+
 		$this->id = $id;
 		$this->options['url'] = $url;
-
-		$this->initDefaultOptions();
 	}
 
 	/**
@@ -47,12 +47,7 @@ class Html
 	 */ 
 	protected function initDefaultOptions()
 	{
-		$options = ['flash_swf_url', 'silverlight_xap_url'];
-
-		foreach ($options as $option) 
-		{
-			$this->options[$option] = config('plupload.' . $option);
-		}
+		$this->options = array_except(config('plupload'), ['chunk_path']);
 	}
 
 	/**
