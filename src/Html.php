@@ -119,7 +119,7 @@ class Html
         $options = array_merge($this->options, $options);
 
         // csrf token
-        $options['multipart_params']['_token'] = csrf_token();
+        $options['multipart_params']['_token'] = $this->app['session']->getToken();
 
         $this->initDefaultButtons($options);
 
