@@ -42,7 +42,7 @@ function createUploader(uploaderId)
 						if (deleteUrl) {
 							$.ajax({
 								dataType: 'json',
-								type: 'DELETE',
+								type: deleteMethod,
 								url: deleteUrl,
 								data: options.multipart_params,
 								success: function(result) {                                  
