@@ -66,6 +66,24 @@ Create new uploader.
 
 Renders the uploader. You can customize this by passing a view name.
 
+##### 3. Use package js file to initialize Plupload (Optional)
+
+If you do not want to write your own js to initialize Plupload, you can use the `upload.js` file that included with the package in `resources/views/vendor/plupload/assets/js`. Make sure that you already have `jQuery` loaded on your page.
+
+**Initialize Plupload**
+
+```js
+<script>
+$(function () {
+    createUploader('my_uploader_id'); // The Id that you used to create with the builder
+});
+</script>
+```
+
+The following method is available if you use the `upload.js` file.
+
+**Uploader options**
+
 **setOptions(array $options)**
 
 Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Options to see all the options. You can set the default global options in `config/plupload.php`
@@ -81,21 +99,6 @@ Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Op
         ],
     ])
     ->render() !!}
-```
-
-
-##### 3. Use package js file to initialize Plupload (Optional) (beta)
-
-If you do not want to write your own js to initialize Plupload, you can use the `upload.js` file that included with the package in `resources/views/vendor/plupload/assets/js`. Make sure that you already have `jQuery` loaded on your page.
-
-**Initialize Plupload**
-
-```js
-<script>
-$(function () {
-    createUploader('my_uploader_id'); // The Id that you used to create with the builder
-});
-</script>
 ```
 
 **Automatically start upload when files added**
