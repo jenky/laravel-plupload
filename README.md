@@ -72,15 +72,15 @@ Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Op
 
 ```php
 {!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))
-	->setOptions([
-		'filters' => [
-			'max_file_size' => '2mb',
-			'mime_types' => [
-				['title' => "Image files", 'extensions' => "jpg,gif,png"],
-			],
-		],
-	])
-	->render() !!}
+    ->setOptions([
+        'filters' => [
+            'max_file_size' => '2mb',
+            'mime_types' => [
+                ['title' => "Image files", 'extensions' => "jpg,gif,png"],
+            ],
+        ],
+    ])
+    ->render() !!}
 ```
 
 
@@ -93,7 +93,7 @@ If you do not want to write your own js to initialize Plupload, you can use the 
 ```js
 <script>
 $(function () {
-	createUploader('my_uploader_id'); // The Id that you used to create with the builder
+    createUploader('my_uploader_id'); // The Id that you used to create with the builder
 });
 </script>
 ```
@@ -122,27 +122,26 @@ Use `setAutoStart()` in your builder before calling render() function.
 Use this in your route or your controller. Feel free to modify to suit your needs.
 
 ```php
-  return \Plupload::file('file', function($file)
-	{
-		// Store the uploaded file
-		$file->move(storage_path('upload/images'), $file->getClientOriginalName());
+return \Plupload::file('file', function($file) {
+    // Store the uploaded file
+    $file->move(storage_path('upload/images'), $file->getClientOriginalName());
 
-		// Save the record to the db
-		$photo = \App\Photo::create([
-			'name' => $file->getClientOriginalName(),
-			'type' => 'image',
-			//...
-		]);
+    // Save the record to the db
+    $photo = \App\Photo::create([
+        'name' => $file->getClientOriginalName(),
+        'type' => 'image',
+        //...
+    ]);
 
-		// This will be included in JSON response result
-		return [
-			'success' => true,
-			'message' => 'Upload successful.',
-			'id' => $photo->id,
-			//'url' => $photo->getImageUrl($filename, 'medium'),
-			//'deleteUrl' => action('MediaController@deleteDelete', [$photo->id])
-		];
-	});
+    // This will be included in JSON response result
+    return [
+        'success'   => true,
+        'message'   => 'Upload successful.',
+        'id'        => $photo->id,
+        // 'url'       => $photo->getImageUrl($filename, 'medium'),
+        // 'deleteUrl' => action('MediaController@deleteDelete', [$photo->id])
+    ];
+});
 ```
 
 If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link while the `id` will be appended to the uploader as a hidden field with the following format:
