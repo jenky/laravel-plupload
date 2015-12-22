@@ -1,10 +1,16 @@
 <?php
 
-
 namespace Jenky\LaravelPlupload;
+
+use Illuminate\Contracts\Foundation\Application;
 
 class Html
 {
+    /**
+     * @var Illuminate\Contracts\Foundation\Application
+     */
+    protected $app;
+
     /**
      * @var bool
      */
@@ -35,8 +41,17 @@ class Html
      */
     protected $uploadButton;
 
-    public function __construct($id, $url)
+    /**
+     * Class constructor.
+     * 
+     * @param  string $id
+     * @param  string $url
+     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @return void
+     */
+    public function __construct($id, $url, Application $app)
     {
+        $this->app = $app;
         $this->initDefaultOptions();
 
         $this->id = $id;
@@ -45,17 +60,18 @@ class Html
 
     /**
      * Set default uploader options.
+     *
+     * @return void
      */
     protected function initDefaultOptions()
     {
-        $this->options = array_except(config('plupload'), ['chunk_path']);
+        $this->options = array_except($this->app['config']->get('plupload'), ['chunk_path']);
     }
 
     /**
      * Set default uploader buttons.
      * 
-     * @param array $options
-     * 
+     * @param  array $options
      * @return void
      */
     protected function initDefaultButtons(array $options)
@@ -77,10 +93,15 @@ class Html
         }
     }
 
+    /**
+     * Initialize the options.
+     * 
+     * @return array
+     */
     protected function init()
     {
         if (empty($this->options['url'])) {
-            throw new Exception('Missing URL option.', 1);
+            throw new Exception('Missing URL option.');
         }
 
         $options = [];
@@ -115,8 +136,7 @@ class Html
     /**
      * Set uploader auto start.
      * 
-     * @param bool $bool
-     * 
+     * @param  bool $bool
      * @return void
      */
     public function setAutoStart($bool)
@@ -131,8 +151,7 @@ class Html
      *
      * @see https://github.com/moxiecode/plupload/wiki/Options
      * 
-     * @param array $options
-     * 
+     * @param  array $options
      * @return void
      */
     public function setOptions(array $options)
@@ -146,8 +165,7 @@ class Html
     /**
      * Set uploader pick files button.
      * 
-     * @param string $button
-     * 
+     * @param  string $button
      * @return void
      */
     public function setPickFilesButton($button)
@@ -160,8 +178,7 @@ class Html
     /**
      * Set uploader upload button.
      * 
-     * @param string $button
-     * 
+     * @param  string $button
      * @return void
      */
     public function setUploadButton($button)
@@ -174,8 +191,7 @@ class Html
     /**	 
      * Set uploader custom params.
      * 
-     * @param array $params
-     * 
+     * @param  array $params
      * @return void
      */
     public function setCustomParams(array $params)
@@ -185,10 +201,17 @@ class Html
         return $this;
     }
 
+    /**
+     * Render the upload handler buttons.
+     * 
+     * @param  string $view
+     * @param  array  $extra
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function render($view = 'plupload::uploader', array $extra = [])
     {
         $this->init();
 
-        return view($view, $this->data);
+        return $this->app['view']->make($view, $this->data);
     }
 }

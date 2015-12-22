@@ -1,30 +1,45 @@
 <?php
 
-
 namespace Jenky\LaravelPlupload;
 
 use Closure;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class File
 {
     /**
+     * @var Illuminate\Contracts\Foundation\Application
+     */
+    protected $app;
+
+    /**
      * @var Illuminate\Http\Request
      */
     protected $request;
 
     /**
-     * @var Illuminate\Filesystem\Filesystem
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      */
     protected $storage;
 
-    private $maxFileAge = 600; //600 secondes
+    /** 
+     * @var int
+     */
+    private $maxFileAge = 600; // 600 seconds
 
-    public function __construct(Request $request)
+    /**
+     * Class Constructor.
+     * 
+     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @return void
+     */
+    public function __construct(Application $app)
     {
-        $this->request = $request;
-        $this->storage = app('files');
+        $this->app = $app;
+        $this->request = $app['request'];
+        $this->storage = $app['files'];
     }
 
     /**
@@ -34,7 +49,7 @@ class File
      */
     public function getChunkPath()
     {
-        $path = config('plupload.chunk_path');
+        $path = $this->app['config']->get('plupload.chunk_path');
 
         if (!$this->storage->isDirectory($path)) {
             $this->storage->makeDirectory($path, 0777, true);
@@ -46,9 +61,8 @@ class File
     /**
      * Process uploaded files.
      * 
-     * @param string  $name
-     * @param closure $closure
-     * 
+     * @param  string  $name
+     * @param  closure $closure
      * @return array
      */
     public function process($name, Closure $closure)
@@ -70,10 +84,9 @@ class File
     /**
      * Handle single uploaded file.
      * 
-     * @param string  $name
-     * @param closure $closure
-     * 
-     * @return mixed
+     * @param  string  $name
+     * @param  closure $closure
+     * @return void
      */
     public function single($name, Closure $closure)
     {
@@ -85,9 +98,8 @@ class File
     /**
      * Handle single uploaded file.
      * 
-     * @param string  $name
-     * @param closure $closure
-     * 
+     * @param  string  $name
+     * @param  closure $closure
      * @return mixed
      */
     public function chunks($name, Closure $closure)
@@ -118,6 +130,9 @@ class File
 
     /**
      * Remove old chunks.
+     *
+     * @param  string $filePath
+     * @return void
      */
     protected function removeOldData($filePath)
     {
@@ -128,6 +143,10 @@ class File
 
     /**
      * Merge chunks.
+     *
+     * @param  string $filePathPartial
+     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @return void
      */
     protected function appendData($filePathPartial, UploadedFile $file)
     {

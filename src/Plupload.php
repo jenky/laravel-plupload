@@ -1,21 +1,28 @@
 <?php
 
-
 namespace Jenky\LaravelPlupload;
 
 use Closure;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
 class Plupload
 {
     /**
-     * @var Illuminate\Http\Request
+     * @var Illuminate\Contracts\Foundation\Application
      */
-    protected $request;
+    protected $app;
 
-    public function __construct(Request $request)
+    /**
+     * Class constructor.
+     * 
+     * @param  Illuminate\Contracts\Foundation\Application $app
+     * @return void
+     */
+    public function __construct(Application $app)
     {
-        $this->request = $request;
+        $this->app = $app;
     }
 
     /**
@@ -23,12 +30,11 @@ class Plupload
      * 
      * @param string  $name
      * @param closure $closure
-     * 
      * @return void
      */
     public function file($name, Closure $closure)
     {
-        $fileHandler = new File($this->request);
+        $fileHandler = new File($this->app);
 
         return $fileHandler->process($name, $closure);
     }
@@ -38,11 +44,10 @@ class Plupload
      * 
      * @param string $id
      * @param string $url
-     * 
-     * @return void
+     * @return \Jenky\LaravelPlupload\Html
      */
     public function make($id, $url)
     {
-        return new Html($id, $url);
+        return new Html($id, $url, $this->app);
     }
 }
