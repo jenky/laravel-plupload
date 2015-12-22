@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jenky\LaravelPlupload\Facades;
 
 use Illuminate\Support\Facades\Facade;

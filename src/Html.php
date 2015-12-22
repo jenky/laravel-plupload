@@ -44,9 +44,10 @@ class Html
     /**
      * Class constructor.
      * 
-     * @param  string $id
-     * @param  string $url
-     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param string                                       $id
+     * @param string                                       $url
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     *
      * @return void
      */
     public function __construct($id, $url, Application $app)
@@ -71,7 +72,8 @@ class Html
     /**
      * Set default uploader buttons.
      * 
-     * @param  array $options
+     * @param array $options
+     *
      * @return void
      */
     protected function initDefaultButtons(array $options)
@@ -136,7 +138,8 @@ class Html
     /**
      * Set uploader auto start.
      * 
-     * @param  bool $bool
+     * @param bool $bool
+     *
      * @return void
      */
     public function setAutoStart($bool)
@@ -151,7 +154,8 @@ class Html
      *
      * @see https://github.com/moxiecode/plupload/wiki/Options
      * 
-     * @param  array $options
+     * @param array $options
+     *
      * @return void
      */
     public function setOptions(array $options)
@@ -165,7 +169,8 @@ class Html
     /**
      * Set uploader pick files button.
      * 
-     * @param  string $button
+     * @param string $button
+     *
      * @return void
      */
     public function setPickFilesButton($button)
@@ -178,7 +183,8 @@ class Html
     /**
      * Set uploader upload button.
      * 
-     * @param  string $button
+     * @param string $button
+     *
      * @return void
      */
     public function setUploadButton($button)
@@ -191,7 +197,8 @@ class Html
     /**	 
      * Set uploader custom params.
      * 
-     * @param  array $params
+     * @param array $params
+     *
      * @return void
      */
     public function setCustomParams(array $params)
@@ -204,8 +211,9 @@ class Html
     /**
      * Render the upload handler buttons.
      * 
-     * @param  string $view
-     * @param  array  $extra
+     * @param string $view
+     * @param array  $extra
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function render($view = 'plupload::uploader', array $extra = [])
