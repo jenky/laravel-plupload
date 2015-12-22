@@ -80,9 +80,9 @@ $(function () {
 </script>
 ```
 
-The following method is available if you use the `upload.js` file.
+The following methods is available if you use the `upload.js` file.
 
-**Uploader options**
+**Set Uploader options**
 
 **setOptions(array $options)**
 
