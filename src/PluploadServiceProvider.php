@@ -63,6 +63,7 @@ class PluploadServiceProvider extends ServiceProvider
         $this->app->singleton('plupload', function ($app) {
             $request = $app['request'];
             $config = $app['config'];
+
             return new Plupload($app);
         });
     }
