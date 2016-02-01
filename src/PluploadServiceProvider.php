@@ -41,18 +41,20 @@ class PluploadServiceProvider extends ServiceProvider
     protected function setupConfig()
     {
         $configPath = __DIR__.'/../config/plupload.php';
-        $viewsPath = __DIR__.'/../views';
-        $assetsPath = __DIR__.'/../assets';
+        $viewsPath = __DIR__.'/../resources/views';
+        $assetsPath = __DIR__.'/../resources/assets';
+        $translationsPath = __DIR__.'/../resources/lang';
 
         $this->mergeConfigFrom($configPath, 'plupload');
         $this->loadViewsFrom($viewsPath, 'plupload');
+        $this->loadTranslationsFrom($translationsPath, 'plupload');
 
         $this->publishes([$configPath => config_path('plupload.php')], 'config');
         $this->publishes([
             $viewsPath        => base_path('resources/views/vendor/plupload'),
             $assetsPath.'/js' => base_path('resources/assets/plupload'),
+            $translationsPath => base_path('resources/lang'),
         ]);
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'plupload');
     }
 
     /**

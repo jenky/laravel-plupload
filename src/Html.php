@@ -220,6 +220,8 @@ class Html
     {
         $this->init();
 
+        $this->data = array_merge($this->data, $extra);
+
         return $this->app['view']->make($view, $this->data);
     }
 }

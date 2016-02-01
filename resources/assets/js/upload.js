@@ -31,7 +31,7 @@ function createUploader(uploaderId)
 					$filelist.append(
 						'<div id="' + file.id + '" class="alert alert-file">' +
 						'<div class="filename hide">' + file.name + ' (' + plupload.formatSize(file.size) + ')  <button type="button" class="close cancelUpload">&times;</button></div>' +
-						'<div class="progress progress-striped"><div class="progress-bar" style="width: 1%;"></div></div></div>');
+						'<div class="progress progress-striped"><div class="progress-bar" style="width: 0;"></div></div></div>');
 
 					$filelist.on('click', '#' + file.id + ' button.cancelUpload', function() {
 						var $this = $(this),
@@ -66,7 +66,7 @@ function createUploader(uploaderId)
 					});
 				}); 
 				up.refresh(); // Reposition Flash/Silverlight
-				if (autoStart || !options.multi_selection) {
+				if (autoStart) {
 					$uploadAction.hide();
 					up.start();
 				}
