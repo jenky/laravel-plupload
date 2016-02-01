@@ -81,7 +81,7 @@ class Html
         if (!$this->pickFilesButton) {
             $this->pickFilesButton = '
 				<a class="btn btn-primary btn-browse" id="'.$options['browse_button'].'" href="javascript:;">
-					<i class="fa fa-file"></i> Browse
+					<i class="fa fa-file"></i> '.trans('plupload::ui.browse').'
 				</a>
 			';
         }
@@ -89,7 +89,7 @@ class Html
         if (!$this->uploadButton) {
             $this->uploadButton = '
 				<a class="btn btn-default btn-upload" id="uploader-'.$this->id.'-upload" href="javascript:;">
-					<i class="fa fa-upload"></i> Upload
+					<i class="fa fa-upload"></i> '.trans('plupload::ui.upload').'
 				</a>
 			';
         }
