@@ -1,5 +1,6 @@
 <?php
-return array(
-    'browse'=>'选择文件',
-    'upload'=>'上传',
-);
+
+return [
+    'browse' => '选择文件',
+    'upload' => '上传',
+];
