@@ -1,5 +1,6 @@
 <?php
-return array(
-    'browse'=>'Browse',
-    'upload'=>'Upload',
-);
+
+return [
+    'browse' => 'Browse',
+    'upload' => 'Upload',
+];

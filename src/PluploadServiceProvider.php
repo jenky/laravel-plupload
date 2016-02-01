@@ -47,13 +47,12 @@ class PluploadServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($configPath, 'plupload');
         $this->loadViewsFrom($viewsPath, 'plupload');
 
-
         $this->publishes([$configPath => config_path('plupload.php')], 'config');
         $this->publishes([
             $viewsPath        => base_path('resources/views/vendor/plupload'),
             $assetsPath.'/js' => base_path('resources/assets/plupload'),
         ]);
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'plupload');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'plupload');
     }
 
     /**
