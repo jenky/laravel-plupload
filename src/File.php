@@ -24,14 +24,14 @@ class File
      */
     protected $storage;
 
-    /** 
+    /**
      * @var int
      */
     private $maxFileAge = 600; // 600 seconds
 
     /**
      * Class Constructor.
-     * 
+     *
      * @param \Illuminate\Contracts\Foundation\Application $app
      *
      * @return void
@@ -45,7 +45,7 @@ class File
 
     /**
      * Get chuck upload path.
-     * 
+     *
      * @return string
      */
     public function getChunkPath()
@@ -61,7 +61,7 @@ class File
 
     /**
      * Process uploaded files.
-     * 
+     *
      * @param string  $name
      * @param closure $closure
      *
@@ -85,7 +85,7 @@ class File
 
     /**
      * Handle single uploaded file.
-     * 
+     *
      * @param string  $name
      * @param closure $closure
      *
@@ -100,7 +100,7 @@ class File
 
     /**
      * Handle single uploaded file.
-     * 
+     *
      * @param string  $name
      * @param closure $closure
      *
@@ -174,7 +174,7 @@ class File
 
     /**
      * Check if request has chunks.
-     * 
+     *
      * @return bool
      */
     public function hasChunks()

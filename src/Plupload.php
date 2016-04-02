@@ -14,7 +14,7 @@ class Plupload
 
     /**
      * Class constructor.
-     * 
+     *
      * @param Illuminate\Contracts\Foundation\Application $app
      *
      * @return void
@@ -26,7 +26,7 @@ class Plupload
 
     /**
      * File upload handler.
-     * 
+     *
      * @param string  $name
      * @param closure $closure
      *
@@ -41,7 +41,7 @@ class Plupload
 
     /**
      * Html template handler.
-     * 
+     *
      * @param string $id
      * @param string $url
      *
