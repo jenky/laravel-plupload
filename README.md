@@ -11,7 +11,7 @@ This package uses some parts of https://github.com/jildertmiedema/laravel-pluplo
 Require this package with composer:
 
 ```
-composer require jenky/laravel-plupload ~1.0
+composer require jenky/laravel-plupload
 ```
 
 or add this to `composer.json`
