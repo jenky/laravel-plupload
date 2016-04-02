@@ -43,7 +43,7 @@ class Html
 
     /**
      * Class constructor.
-     * 
+     *
      * @param string                                       $id
      * @param string                                       $url
      * @param \Illuminate\Contracts\Foundation\Application $app
@@ -71,7 +71,7 @@ class Html
 
     /**
      * Set default uploader buttons.
-     * 
+     *
      * @param array $options
      *
      * @return void
@@ -97,7 +97,7 @@ class Html
 
     /**
      * Initialize the options.
-     * 
+     *
      * @return array
      */
     protected function init()
@@ -137,7 +137,7 @@ class Html
 
     /**
      * Set uploader auto start.
-     * 
+     *
      * @param bool $bool
      *
      * @return void
@@ -153,7 +153,7 @@ class Html
      * Set uploader options.
      *
      * @see https://github.com/moxiecode/plupload/wiki/Options
-     * 
+     *
      * @param array $options
      *
      * @return void
@@ -168,7 +168,7 @@ class Html
 
     /**
      * Set uploader pick files button.
-     * 
+     *
      * @param string $button
      *
      * @return void
@@ -182,7 +182,7 @@ class Html
 
     /**
      * Set uploader upload button.
-     * 
+     *
      * @param string $button
      *
      * @return void
@@ -194,9 +194,9 @@ class Html
         return $this;
     }
 
-    /**	 
+    /**
      * Set uploader custom params.
-     * 
+     *
      * @param array $params
      *
      * @return void
@@ -210,7 +210,7 @@ class Html
 
     /**
      * Render the upload handler buttons.
-     * 
+     *
      * @param string $view
      * @param array  $extra
      *
