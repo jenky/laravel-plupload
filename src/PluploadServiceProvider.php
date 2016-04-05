@@ -53,7 +53,7 @@ class PluploadServiceProvider extends ServiceProvider
         $this->publishes([
             $viewsPath        => base_path('resources/views/vendor/plupload'),
             $assetsPath.'/js' => base_path('resources/assets/plupload'),
-            $translationsPath => base_path('resources/lang'),
+            $translationsPath => base_path('resources/lang/vendor/plupload'),
         ]);
     }
 
