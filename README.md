@@ -17,7 +17,7 @@ composer require jenky/laravel-plupload
 or add this to `composer.json`
 
 ```
-"jenky/laravel-plupload": "~1.0"
+"jenky/laravel-plupload": "^1.0"
 ```
 
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`
@@ -39,6 +39,10 @@ Copy the package config to your local config with the publish command:
 
 ```
 php artisan vendor:publish
+```
+or
+```
+php artisan vendor:publish --provider="Jenky\LaravelPlupload\PluploadServiceProvider"
 ```
 
 
