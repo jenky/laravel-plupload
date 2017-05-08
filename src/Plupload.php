@@ -15,8 +15,7 @@ class Plupload
     /**
      * Class constructor.
      *
-     * @param Illuminate\Contracts\Foundation\Application $app
-     *
+     * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function __construct(Application $app)
@@ -27,9 +26,8 @@ class Plupload
     /**
      * File upload handler.
      *
-     * @param string  $name
-     * @param closure $closure
-     *
+     * @param  string $name
+     * @param  closure $closure
      * @return void
      */
     public function file($name, Closure $closure)
@@ -42,9 +40,8 @@ class Plupload
     /**
      * Html template handler.
      *
-     * @param string $id
-     * @param string $url
-     *
+     * @param  string $id
+     * @param  string $url
      * @return \Jenky\LaravelPlupload\Html
      */
     public function make($id, $url)

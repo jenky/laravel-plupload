@@ -32,8 +32,7 @@ class File
     /**
      * Class Constructor.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
+     * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function __construct(Application $app)
@@ -52,7 +51,7 @@ class File
     {
         $path = $this->app['config']->get('plupload.chunk_path');
 
-        if (!$this->storage->isDirectory($path)) {
+        if (! $this->storage->isDirectory($path)) {
             $this->storage->makeDirectory($path, 0777, true);
         }
 
@@ -62,9 +61,8 @@ class File
     /**
      * Process uploaded files.
      *
-     * @param string  $name
-     * @param closure $closure
-     *
+     * @param  string $name
+     * @param  closure $closure
      * @return array
      */
     public function process($name, Closure $closure)
@@ -86,9 +84,8 @@ class File
     /**
      * Handle single uploaded file.
      *
-     * @param string  $name
-     * @param closure $closure
-     *
+     * @param  string $name
+     * @param  closure $closure
      * @return void
      */
     public function single($name, Closure $closure)
@@ -101,9 +98,8 @@ class File
     /**
      * Handle single uploaded file.
      *
-     * @param string  $name
-     * @param closure $closure
-     *
+     * @param  string $name
+     * @param  closure $closure
      * @return mixed
      */
     public function chunks($name, Closure $closure)
@@ -135,8 +131,7 @@ class File
     /**
      * Remove old chunks.
      *
-     * @param string $filePath
-     *
+     * @param  string $filePath
      * @return void
      */
     protected function removeOldData($filePath)
@@ -149,18 +144,17 @@ class File
     /**
      * Merge chunks.
      *
-     * @param string                                              $filePathPartial
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     *
+     * @param  string $filePathPartial
+     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @return void
      */
     protected function appendData($filePathPartial, UploadedFile $file)
     {
-        if (!$out = @fopen($filePathPartial, 'ab')) {
+        if (! $out = @fopen($filePathPartial, 'ab')) {
             throw new Exception('Failed to open output stream.', 102);
         }
 
-        if (!$in = @fopen($file->getPathname(), 'rb')) {
+        if (! $in = @fopen($file->getPathname(), 'rb')) {
             throw new Exception('Failed to open input stream', 101);
         }
 
