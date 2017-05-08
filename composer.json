@@ -1,7 +1,10 @@
 {
     "name": "jenky/laravel-plupload",
-    "description": "Plupload package for Laravel 5.0",
-    "keywords": ["laravel", "plupload"],
+    "description": "Plupload package for Laravel 5",
+    "keywords": [
+        "laravel",
+        "plupload"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -11,12 +14,19 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/support": "~5.0"
+        "illuminate/support": "^5.1"
     },
     "autoload": {
         "psr-4": {
             "Jenky\\LaravelPlupload\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
 }
