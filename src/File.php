@@ -5,7 +5,7 @@ namespace Jenky\LaravelPlupload;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Http\UploadedFile;
 
 class File
 {
@@ -145,7 +145,7 @@ class File
      * Merge chunks.
      *
      * @param  string $filePathPartial
-     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param  \Illuminate\Http\UploadedFile $file
      * @return void
      */
     protected function appendData($filePathPartial, UploadedFile $file)
