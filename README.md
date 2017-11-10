@@ -1,10 +1,10 @@
 # Laravel 5 Plupload
 
-[![Latest Stable Version](https://poser.pugx.org/jenky/laravel-plupload/v/stable.svg)](https://packagist.org/packages/jenky/laravel-plupload) 
-[![Total Downloads](https://poser.pugx.org/jenky/laravel-plupload/d/total.svg)](https://packagist.org/packages/jenky/laravel-plupload) 
+[![Latest Stable Version](https://poser.pugx.org/jenky/laravel-plupload/v/stable.svg)](https://packagist.org/packages/jenky/laravel-plupload)
+[![Total Downloads](https://poser.pugx.org/jenky/laravel-plupload/d/total.svg)](https://packagist.org/packages/jenky/laravel-plupload)
 [![License](https://poser.pugx.org/jenky/laravel-plupload/license.svg)](https://packagist.org/packages/jenky/laravel-plupload)
 
-######Laravel package for Plupload http://plupload.com.
+##### Laravel package for Plupload http://plupload.com.
 This package uses some parts of https://github.com/jildertmiedema/laravel-plupload
 
 ## Installation
@@ -17,22 +17,18 @@ composer require jenky/laravel-plupload
 or add this to `composer.json`
 
 ```
-"jenky/laravel-plupload": "^1.0"
+"jenky/laravel-plupload": "^2.0"
 ```
 
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
-'Jenky\LaravelPlupload\PluploadServiceProvider',
-// or 
-Jenky\LaravelPlupload\PluploadServiceProvider::class, // PHP 5.5
+Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
 
 Add this to your facades in `config/app.php`:
 
 ```php
-'Plupload' => 'Jenky\LaravelPlupload\Facades\Plupload',
-// or 
-'Plupload' => Jenky\LaravelPlupload\Facades\Plupload::class, // PHP 5.5
+'Plupload' => Jenky\LaravelPlupload\Facades\Plupload::class,
 ```
 
 Copy the package config to your local config with the publish command:
@@ -66,9 +62,9 @@ Create new uploader.
 {!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))->render() !!}
 ```
 
-**render($view = 'plupload::uploader')**
+**render($view = 'plupload::uploader', array $extra = [])**
 
-Renders the uploader. You can customize this by passing a view name.
+Renders the uploader. You can customize this by passing a view name and it's data. From version `2.0`, you can omit the `render` method in the builder if you don't want to set the view or extra data.
 
 ##### 3. Use package js file to initialize Plupload (Optional)
 
@@ -154,6 +150,6 @@ return \Plupload::file('file', function($file) {
 
 If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link while the `id` will be appended to the uploader as a hidden field with the following format:
 
-`<input type="hidden" name="{uploaderId}_files[]" value="{id}" />`. 
+`<input type="hidden" name="{uploaderId}_files[]" value="{id}" />`.
 
 Please note that the `deleteUrl` uses `DELETE` method.
