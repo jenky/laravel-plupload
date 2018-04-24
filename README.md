@@ -126,12 +126,12 @@ Use `setAutoStart()` in your builder before calling render() function.
 Use this in your route or your controller. Feel free to modify to suit your needs.
 
 ```php
-return \Plupload::file('file', function($file) {
-    // Store the uploaded file
-    $file->move(storage_path('upload/images'), $file->getClientOriginalName());
+return Plupload::file('file', function($file) {
+    // Store the uploaded file using storage disk
+    $path = Storage::putFile('photos', $file);
 
     // Save the record to the db
-    $photo = \App\Photo::create([
+    $photo = App\Photo::create([
         'name' => $file->getClientOriginalName(),
         'type' => 'image',
         //...
@@ -139,11 +139,11 @@ return \Plupload::file('file', function($file) {
 
     // This will be included in JSON response result
     return [
-        'success'   => true,
-        'message'   => 'Upload successful.',
-        'id'        => $photo->id,
-        // 'url'       => $photo->getImageUrl($filename, 'medium'),
-        // 'deleteUrl' => action('MediaController@deleteDelete', [$photo->id])
+        'success' => true,
+        'message' => 'Upload successful.',
+        'id' => $photo->id,
+        // 'url' => $photo->getImageUrl($filename, 'medium'),
+        // 'deleteUrl' => route('photos.destroy', $photo)
     ];
 });
 ```
