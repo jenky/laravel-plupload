@@ -98,8 +98,7 @@ Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Op
                 ['title' => "Image files", 'extensions' => "jpg,gif,png"],
             ],
         ],
-    ])
-    ->render() !!}
+    ]) !!}
 ```
 
 **Automatically start upload when files added**
@@ -112,7 +111,7 @@ Use `setAutoStart()` in your builder before calling render() function.
 
 ```php
 {!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))
-  ->setAutoStart(true)->render() !!}
+  ->setAutoStart(true) !!}
 ```
 
 
