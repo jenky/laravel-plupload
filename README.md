@@ -20,7 +20,7 @@ or add this to `composer.json`
 "jenky/laravel-plupload": "^2.0"
 ```
 
-[For Laravel 5.4 and below] After updating composer, add the ServiceProvider to the providers array in `config/app.php`
+**[For Laravel 5.4 and below]** After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
@@ -59,7 +59,7 @@ Create new uploader.
 * **$id**: the unique identification for the uploader.
 * **$url**: the upload url end point.
 ```php
-{!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))->render() !!}
+{!! Plupload::make('my_uploader_id', route('photos.store'))->render() !!}
 ```
 
 **render($view = 'plupload::uploader', array $extra = [])**
@@ -90,12 +90,12 @@ These following methods are useable with the `upload.js` file.
 Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Options to see all the options. You can set the default global options in `config/plupload.php`
 
 ```php
-{!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))
+{!! Plupload::make('my_uploader_id', route('photos.store'))
     ->setOptions([
         'filters' => [
             'max_file_size' => '2mb',
             'mime_types' => [
-                ['title' => "Image files", 'extensions' => "jpg,gif,png"],
+                ['title' => 'Image files', 'extensions' => 'jpg,gif,png'],
             ],
         ],
     ]) !!}
@@ -110,7 +110,7 @@ Use `setAutoStart()` in your builder before calling render() function.
 * **$bool**: `true` or `false`
 
 ```php
-{!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))
+{!! Plupload::make('my_uploader_id', route('photos.store'))
   ->setAutoStart(true) !!}
 ```
 
@@ -133,7 +133,7 @@ return Plupload::file('file', function($file) {
     $photo = App\Photo::create([
         'name' => $file->getClientOriginalName(),
         'type' => 'image',
-        //...
+        // ...
     ]);
 
     // This will be included in JSON response result
@@ -143,6 +143,7 @@ return Plupload::file('file', function($file) {
         'id' => $photo->id,
         // 'url' => $photo->getImageUrl($filename, 'medium'),
         // 'deleteUrl' => route('photos.destroy', $photo)
+        // ...
     ];
 });
 ```
