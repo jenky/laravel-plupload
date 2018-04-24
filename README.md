@@ -20,12 +20,12 @@ or add this to `composer.json`
 "jenky/laravel-plupload": "^2.0"
 ```
 
-After updating composer, add the ServiceProvider to the providers array in `config/app.php`
+[For Laravel 5.4 and below] After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
 
-Add this to your facades in `config/app.php`:
+and add this to your facades in `config/app.php`:
 
 ```php
 'Plupload' => Jenky\LaravelPlupload\Facades\Plupload::class,
@@ -98,8 +98,7 @@ Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Op
                 ['title' => "Image files", 'extensions' => "jpg,gif,png"],
             ],
         ],
-    ])
-    ->render() !!}
+    ]) !!}
 ```
 
 **Automatically start upload when files added**
@@ -112,7 +111,7 @@ Use `setAutoStart()` in your builder before calling render() function.
 
 ```php
 {!! Plupload::make('my_uploader_id', action('MediaController@postImageUpload'))
-  ->setAutoStart(true)->render() !!}
+  ->setAutoStart(true) !!}
 ```
 
 
@@ -126,12 +125,12 @@ Use `setAutoStart()` in your builder before calling render() function.
 Use this in your route or your controller. Feel free to modify to suit your needs.
 
 ```php
-return \Plupload::file('file', function($file) {
-    // Store the uploaded file
-    $file->move(storage_path('upload/images'), $file->getClientOriginalName());
+return Plupload::file('file', function($file) {
+    // Store the uploaded file using storage disk
+    $path = Storage::putFile('photos', $file);
 
     // Save the record to the db
-    $photo = \App\Photo::create([
+    $photo = App\Photo::create([
         'name' => $file->getClientOriginalName(),
         'type' => 'image',
         //...
@@ -139,11 +138,11 @@ return \Plupload::file('file', function($file) {
 
     // This will be included in JSON response result
     return [
-        'success'   => true,
-        'message'   => 'Upload successful.',
-        'id'        => $photo->id,
-        // 'url'       => $photo->getImageUrl($filename, 'medium'),
-        // 'deleteUrl' => action('MediaController@deleteDelete', [$photo->id])
+        'success' => true,
+        'message' => 'Upload successful.',
+        'id' => $photo->id,
+        // 'url' => $photo->getImageUrl($filename, 'medium'),
+        // 'deleteUrl' => route('photos.destroy', $photo)
     ];
 });
 ```
