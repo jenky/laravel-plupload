@@ -26,6 +26,9 @@
         ]
     },
     "extra": {
+        "branch-alias": {
+            "dev-dev": "3.0-dev"
+        },
         "laravel": {
             "providers": [
                 "Jenky\\LaravelPlupload\\PluploadServiceProvider"
