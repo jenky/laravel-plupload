@@ -3,24 +3,19 @@
 namespace Jenky\LaravelPlupload;
 
 use Closure;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 class File
 {
     /**
-     * @var Illuminate\Contracts\Foundation\Application
-     */
-    protected $app;
-
-    /**
      * @var Illuminate\Http\Request
      */
     protected $request;
 
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     * @var Illuminate\Filesystem\Filesystem
      */
     protected $storage;
 
@@ -32,14 +27,12 @@ class File
     /**
      * Class Constructor.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
-    public function __construct(Application $app)
+    public function __construct(Request $request, Filesystem $file)
     {
-        $this->app = $app;
-        $this->request = $app['request'];
-        $this->storage = $app['files'];
+        $this->request = $request;
+        $this->storage = $file;
     }
 
     /**
@@ -49,7 +42,7 @@ class File
      */
     public function getChunkPath()
     {
-        $path = $this->app['config']->get('plupload.chunk_path');
+        $path = config('plupload.chunk_path');
 
         if (! $this->storage->isDirectory($path)) {
             $this->storage->makeDirectory($path, 0777, true);
@@ -104,28 +97,27 @@ class File
      */
     public function chunks($name, Closure $closure)
     {
-        $result = false;
-
-        if ($this->request->hasFile($name)) {
-            $file = $this->request->file($name);
-
-            $chunk = (int) $this->request->get('chunk', false);
-            $chunks = (int) $this->request->get('chunks', false);
-            $originalName = $this->request->get('name');
-
-            $filePath = $this->getChunkPath().'/'.$originalName.'.part';
-
-            $this->removeOldData($filePath);
-            $this->appendData($filePath, $file);
-
-            if ($chunk == $chunks - 1) {
-                $file = new UploadedFile($filePath, $originalName, 'blob', count($filePath), UPLOAD_ERR_OK, true);
-                $result = $closure($file);
-                @unlink($filePath);
-            }
+        if (! $this->request->hasFile($name)) {
+            return;
         }
 
-        return $result;
+        $file = $this->request->file($name);
+        $chunk = (int) $this->request->get('chunk', false);
+        $chunks = (int) $this->request->get('chunks', false);
+        $originalName = $this->request->get('name');
+
+        $filePath = $this->getChunkPath().'/'.$originalName.'.part';
+
+        $this->removeOldData($filePath);
+        $this->appendData($filePath, $file);
+
+        if ($chunk == $chunks - 1) {
+            $file = new UploadedFile($filePath, $originalName, 'blob', count($filePath), UPLOAD_ERR_OK, true);
+            $result = $closure($file);
+            @unlink($filePath);
+        }
+
+        return;
     }
 
     /**

@@ -1,3 +1,4 @@
+
 # Laravel 5 Plupload
 
 [![Latest Stable Version](https://poser.pugx.org/jenky/laravel-plupload/v/stable.svg)](https://packagist.org/packages/jenky/laravel-plupload)
@@ -14,13 +15,8 @@ Require this package with composer:
 composer require jenky/laravel-plupload
 ```
 
-or add this to `composer.json`
-
-```
-"jenky/laravel-plupload": "^2.0"
-```
-
-**[For Laravel 5.4 and below]** After updating composer, add the ServiceProvider to the providers array in `config/app.php`
+**For Laravel 5.4 and below**
+After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
@@ -61,8 +57,14 @@ Create new uploader.
 ```php
 {!! Plupload::make('my_uploader_id', route('photos.store'))->render() !!}
 ```
+or use the helper
+```php
+{!! plupload()->make('my_uploader_id', route('photos.store')) !!}
+// or event shorter
+{!! plupload('my_uploader_id', route('photos.store')) !!}
+```
 
-**render($view = 'plupload::uploader', array $extra = [])**
+**render($view = 'plupload::uploader', array $data = [])**
 
 Renders the uploader. You can customize this by passing a view name and it's data. From version `2.0`, you can omit the `render` method in the builder if you don't want to set the view or extra data.
 
@@ -90,7 +92,7 @@ These following methods are useable with the `upload.js` file.
 Set uploader options. Please visit https://github.com/moxiecode/plupload/wiki/Options to see all the options. You can set the default global options in `config/plupload.php`
 
 ```php
-{!! Plupload::make('my_uploader_id', route('photos.store'))
+{!! plupload('my_uploader_id', route('photos.store'))
     ->setOptions([
         'filters' => [
             'max_file_size' => '2mb',
@@ -110,7 +112,7 @@ Use `setAutoStart()` in your builder before calling render() function.
 * **$bool**: `true` or `false`
 
 ```php
-{!! Plupload::make('my_uploader_id', route('photos.store'))
+{!! plupload('my_uploader_id', route('photos.store'))
   ->setAutoStart(true) !!}
 ```
 
@@ -126,8 +128,8 @@ Use this in your route or your controller. Feel free to modify to suit your need
 
 ```php
 return Plupload::file('file', function($file) {
-    // Store the uploaded file using storage disk
-    $path = Storage::putFile('photos', $file);
+    // Store the uploaded file using any storage disk
+    $path = Storage::disk('local')->putFile('photos', $file);
 
     // Save the record to the db
     $photo = App\Photo::create([
@@ -147,6 +149,13 @@ return Plupload::file('file', function($file) {
     ];
 });
 ```
+Helper is also available
+```php
+return plupload()->file('file', function($file) {
+
+});
+```
+
 
 If you are using the package `upload.js` file. The `url` and `deleteUrl` in the JSON payload will be used to generate preview and delete link while the `id` will be appended to the uploader as a hidden field with the following format:
 

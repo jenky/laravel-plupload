@@ -3,6 +3,7 @@
 namespace Jenky\LaravelPlupload\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Jenky\LaravelPlupload\Contracts\Plupload as PluploadContract;
 
 class Plupload extends Facade
 {
@@ -13,6 +14,6 @@ class Plupload extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'plupload';
+        return PluploadContract::class;
     }
 }

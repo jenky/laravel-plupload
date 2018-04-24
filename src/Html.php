@@ -2,17 +2,10 @@
 
 namespace Jenky\LaravelPlupload;
 
-use Illuminate\Contracts\Foundation\Application;
-
 class Html
 {
     /**
-     * @var Illuminate\Contracts\Foundation\Application
-     */
-    protected $app;
-
-    /**
-     * @var bool
+     * @var array
      */
     protected $data = [];
 
@@ -32,71 +25,23 @@ class Html
     protected $options = [];
 
     /**
-     * @var string
-     */
-    protected $pickFilesButton;
-
-    /**
-     * @var string
-     */
-    protected $uploadButton;
-
-    /**
      * Class constructor.
      *
      * @param  string $id
      * @param  string $url
-     * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
-    public function __construct($id, $url, Application $app)
+    public function __construct($id, $url)
     {
-        $this->app = $app;
-        $this->initDefaultOptions();
-
         $this->id = $id;
+        $this->options = config('plupload.global', []);
         $this->options['url'] = $url;
-    }
-
-    /**
-     * Set default uploader options.
-     *
-     * @return void
-     */
-    protected function initDefaultOptions()
-    {
-        $this->options = array_except($this->app['config']->get('plupload'), ['chunk_path']);
-    }
-
-    /**
-     * Set default uploader buttons.
-     *
-     * @param  array $options
-     * @return void
-     */
-    protected function initDefaultButtons(array $options)
-    {
-        if (! $this->pickFilesButton) {
-            $this->pickFilesButton = '
-				<a class="btn btn-primary btn-browse" id="'.$options['browse_button'].'" href="javascript:;">
-					<i class="fa fa-file"></i> '.trans('plupload::ui.browse').'
-				</a>
-			';
-        }
-
-        if (! $this->uploadButton) {
-            $this->uploadButton = '
-				<a class="btn btn-default btn-upload" id="uploader-'.$this->id.'-upload" href="javascript:;">
-					<i class="fa fa-upload"></i> '.trans('plupload::ui.upload').'
-				</a>
-			';
-        }
     }
 
     /**
      * Initialize the options.
      *
-     * @return array
+     * @return void
      */
     protected function init()
     {
@@ -104,33 +49,16 @@ class Html
             throw new Exception('Missing URL option.');
         }
 
-        $options = [];
-
-        if (empty($this->options['browse_button'])) {
-            $options['browse_button'] = 'uploader-'.$this->id.'-pickfiles';
-        }
-
-        if (empty($this->options['container'])) {
-            $options['container'] = 'uploader-'.$this->id.'-container';
-        }
-
-        $options = array_merge($this->options, $options);
+        $options = $this->options;
+        $id = $this->id;
+        $autoStart = $this->autoStart;
 
         // csrf token
         $options['multipart_params']['_token'] = csrf_token();
+        $options['browse_button'] = 'uploader-'.$this->id.'-pickfiles';
+        $options['container'] = 'uploader-'.$this->id.'-container';
 
-        $this->initDefaultButtons($options);
-
-        $id = $this->id;
-        $autoStart = $this->autoStart;
-        $buttons = [
-            'pickFiles' => $this->pickFilesButton,
-            'upload'    => $this->uploadButton,
-        ];
-
-        $this->data = array_merge($this->data, compact('options', 'id', 'autoStart', 'buttons'));
-
-        return $this->data;
+        $this->data = array_merge($this->data, compact('options', 'id', 'autoStart'));
     }
 
     /**
@@ -151,38 +79,11 @@ class Html
      *
      * @see https://github.com/moxiecode/plupload/wiki/Options
      * @param  array $options
-     * @return void
+     * @return $this
      */
     public function setOptions(array $options)
     {
-        $options = array_except($options, ['url']);
-        $this->options = array_merge($this->options, $options);
-
-        return $this;
-    }
-
-    /**
-     * Set uploader pick files button.
-     *
-     * @param  string $button
-     * @return void
-     */
-    public function setPickFilesButton($button)
-    {
-        $this->pickFilesButton = $button;
-
-        return $this;
-    }
-
-    /**
-     * Set uploader upload button.
-     *
-     * @param  string $button
-     * @return void
-     */
-    public function setUploadButton($button)
-    {
-        $this->uploadButton = $button;
+        $this->options = array_merge($this->options, array_except($options, ['url']));
 
         return $this;
     }
@@ -204,16 +105,14 @@ class Html
      * Render the upload handler buttons.
      *
      * @param  string $view
-     * @param  array $extra
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @param  array $data
+     * @return \Illuminate\View\View
      */
-    public function render($view = 'plupload::uploader', array $extra = [])
+    public function render($view = 'plupload::uploader', array $data = [])
     {
         $this->init();
 
-        $this->data = array_merge($this->data, $extra);
-
-        return $this->app['view']->make($view, $this->data);
+        return view($view, array_merge($this->data, $data));
     }
 
     /**
@@ -223,6 +122,6 @@ class Html
      */
     public function __toString()
     {
-        return $this->render();
+        return (string) $this->render();
     }
 }
