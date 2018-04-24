@@ -20,12 +20,12 @@ or add this to `composer.json`
 "jenky/laravel-plupload": "^2.0"
 ```
 
-After updating composer, add the ServiceProvider to the providers array in `config/app.php`
+[For Laravel 5.4 and below] After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
 
-Add this to your facades in `config/app.php`:
+and add this to your facades in `config/app.php`:
 
 ```php
 'Plupload' => Jenky\LaravelPlupload\Facades\Plupload::class,
