@@ -112,8 +112,7 @@ Use `setAutoStart()` in your builder before calling render() function.
 * **$bool**: `true` or `false`
 
 ```php
-{!! plupload('my_uploader_id', route('photos.store'))
-  ->setAutoStart(true) !!}
+{!! plupload('my_uploader_id', route('photos.store'))->setAutoStart(true) !!}
 ```
 
 
