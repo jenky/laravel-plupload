@@ -25,8 +25,10 @@ class File
     private $maxFileAge = 600; // 600 seconds
 
     /**
-     * Class Constructor.
+     * Create new class instance.
      *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Filesystem\Filesystem $file
      * @return void
      */
     public function __construct(Request $request, Filesystem $file)
@@ -55,7 +57,7 @@ class File
      * Process uploaded files.
      *
      * @param  string $name
-     * @param  closure $closure
+     * @param  \Closure $closure
      * @return array
      */
     public function process($name, Closure $closure)
@@ -78,7 +80,7 @@ class File
      * Handle single uploaded file.
      *
      * @param  string $name
-     * @param  closure $closure
+     * @param  \Closure $closure
      * @return void
      */
     public function single($name, Closure $closure)
@@ -92,7 +94,7 @@ class File
      * Handle single uploaded file.
      *
      * @param  string $name
-     * @param  closure $closure
+     * @param  \Closure $closure
      * @return mixed
      */
     public function chunks($name, Closure $closure)
@@ -102,9 +104,9 @@ class File
         }
 
         $file = $this->request->file($name);
-        $chunk = (int) $this->request->get('chunk', false);
-        $chunks = (int) $this->request->get('chunks', false);
-        $originalName = $this->request->get('name');
+        $chunk = (int) $this->request->input('chunk', false);
+        $chunks = (int) $this->request->input('chunks', false);
+        $originalName = $this->request->input('name');
 
         $filePath = $this->getChunkPath().'/'.$originalName.'.part';
 
@@ -164,6 +166,6 @@ class File
      */
     public function hasChunks()
     {
-        return (bool) $this->request->get('chunks', false);
+        return (bool) $this->request->input('chunks', false);
     }
 }
