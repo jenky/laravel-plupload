@@ -15,8 +15,11 @@ Require this package with composer:
 composer require jenky/laravel-plupload
 ```
 
-**For Laravel 5.4 and below**
-After updating composer, add the ServiceProvider to the providers array in `config/app.php`
+Laravel 5.5+ uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
+
+**For Laravel 5.4 or older**
+
+Add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
@@ -60,7 +63,7 @@ Create new uploader.
 or use the helper
 ```php
 {!! plupload()->make('my_uploader_id', route('photos.store')) !!}
-// or event shorter
+// or even shorter
 {!! plupload('my_uploader_id', route('photos.store')) !!}
 ```
 
