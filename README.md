@@ -20,6 +20,7 @@ Laravel 5.5+ uses Package Auto-Discovery, so doesn't require you to manually add
 **For Laravel 5.4 or older**
 
 Add the ServiceProvider to the providers array in `config/app.php`
+
 ```php
 Jenky\LaravelPlupload\PluploadServiceProvider::class,
 ```
@@ -130,7 +131,7 @@ Use this in your route or your controller. Feel free to modify to suit your need
 
 ```php
 return Plupload::file('file', function($file) {
-    // Store the uploaded file using any storage disk
+    // Store the uploaded file using storage disk
     $path = Storage::disk('local')->putFile('photos', $file);
 
     // Save the record to the db
