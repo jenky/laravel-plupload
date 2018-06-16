@@ -26,7 +26,9 @@ return [
     |
     */
 
-    'flash_swf_url'       => '/js/Moxie.swf',
-    'silverlight_xap_url' => '/js/Moxie.xap',
+    'global' => [
+        'flash_swf_url' => '/js/Moxie.swf',
+        'silverlight_xap_url' => '/js/Moxie.xap',
+    ],
 
 ];

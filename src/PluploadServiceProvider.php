@@ -3,6 +3,7 @@
 namespace Jenky\LaravelPlupload;
 
 use Illuminate\Support\ServiceProvider;
+use Jenky\LaravelPlupload\Contracts\Plupload as PluploadContract;
 
 class PluploadServiceProvider extends ServiceProvider
 {
@@ -51,7 +52,7 @@ class PluploadServiceProvider extends ServiceProvider
 
         $this->publishes([$configPath => config_path('plupload.php')], 'config');
         $this->publishes([
-            $viewsPath        => base_path('resources/views/vendor/plupload'),
+            $viewsPath => base_path('resources/views/vendor/plupload'),
             $assetsPath.'/js' => base_path('resources/assets/plupload'),
             $translationsPath => base_path('resources/lang/vendor/plupload'),
         ]);
@@ -64,12 +65,11 @@ class PluploadServiceProvider extends ServiceProvider
      */
     protected function registerPlupload()
     {
-        $this->app->singleton('plupload', function ($app) {
-            $request = $app['request'];
-            $config = $app['config'];
-
+        $this->app->singleton(PluploadContract::class, function ($app) {
             return new Plupload($app);
         });
+
+        $this->app->alias(PluploadContract::class, 'plupload');
     }
 
     /**
@@ -79,6 +79,6 @@ class PluploadServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['plupload'];
+        return [PluploadContract::class, 'plupload'];
     }
 }

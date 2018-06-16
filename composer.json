@@ -14,12 +14,16 @@
     ],
     "require": {
         "php": ">=5.5.9",
+        "illuminate/contracts": "^5.2",
         "illuminate/support": "^5.2"
     },
     "autoload": {
         "psr-4": {
             "Jenky\\LaravelPlupload\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "branch-alias": {

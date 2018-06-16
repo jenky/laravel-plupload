@@ -4,8 +4,9 @@ namespace Jenky\LaravelPlupload;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
+use Jenky\LaravelPlupload\Contracts\Plupload as Contract;
 
-class Plupload
+class Plupload implements Contract
 {
     /**
      * @var Illuminate\Contracts\Foundation\Application
@@ -32,7 +33,7 @@ class Plupload
      */
     public function file($name, Closure $closure)
     {
-        $fileHandler = new File($this->app);
+        $fileHandler = $this->app->make(File::class);
 
         return $fileHandler->process($name, $closure);
     }
@@ -46,6 +47,6 @@ class Plupload
      */
     public function make($id, $url)
     {
-        return new Html($id, $url, $this->app);
+        return $this->app->make(Html::class, compact('id', 'url'));
     }
 }
