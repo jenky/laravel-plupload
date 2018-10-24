@@ -1,6 +1,7 @@
 {
     "name": "peynman/laravel-plupload",
     "description": "Plupload package for Laravel 5",
+    "version": "3.1",
     "keywords": [
         "laravel",
         "plupload"
