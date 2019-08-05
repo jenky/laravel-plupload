@@ -114,7 +114,15 @@ class File
         $this->appendData($filePath, $file);
 
         if ($chunk == $chunks - 1) {
-            $file = new UploadedFile($filePath, $originalName, 'blob', UPLOAD_ERR_OK, true);
+            // $file = new UploadedFile($filePath, $originalName, 'blob', UPLOAD_ERR_OK, true);
+            $file = app()->make(UploadedFile::class, [
+                'filePath' => $filePath,
+                'originalName' => $originalName,
+                'mimeType' => 'blob',
+                'size' => filesize($filePath),
+                'error' => UPLOAD_ERR_OK,
+                'test' => true,
+            ]);
             @unlink($filePath);
 
             return $closure($file);
