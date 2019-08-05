@@ -114,7 +114,7 @@ class File
         $this->appendData($filePath, $file);
 
         if ($chunk == $chunks - 1) {
-            $file = new UploadedFile($filePath, $originalName, 'blob', count($filePath), UPLOAD_ERR_OK, true);
+            $file = new UploadedFile($filePath, $originalName, 'blob', UPLOAD_ERR_OK, true);
             @unlink($filePath);
 
             return $closure($file);
