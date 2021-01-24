@@ -3,6 +3,7 @@
 namespace Jenky\LaravelPlupload;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Arr;
 
 class Html
 {
@@ -65,7 +66,7 @@ class Html
      */
     protected function initDefaultOptions()
     {
-        $this->options = array_except($this->app['config']->get('plupload'), ['chunk_path']);
+        $this->options = Arr::except($this->app['config']->get('plupload'), ['chunk_path']);
     }
 
     /**
@@ -155,7 +156,7 @@ class Html
      */
     public function setOptions(array $options)
     {
-        $options = array_except($options, ['url']);
+        $options = Arr::except($options, ['url']);
         $this->options = array_merge($this->options, $options);
 
         return $this;
