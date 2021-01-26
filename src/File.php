@@ -115,9 +115,10 @@ class File
 
         if ($chunk == $chunks - 1) {
             $file = new UploadedFile($filePath, $originalName, 'blob', UPLOAD_ERR_OK, true);
+			$result = $closure($file);
             @unlink($filePath);
 
-            return $closure($file);
+            return $result;
         }
     }
 
